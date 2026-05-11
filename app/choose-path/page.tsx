@@ -64,7 +64,7 @@ const PATH_OPTIONS = [
     priceNote: "/ year · 12-month plan",
     tagline: "Premium care for you, dignity for her",
     highlighted: true,
-    planId: "comfort",
+    planId: "essentials",
     cta: "Continue",
     href: "/add-ons",
     features: [
