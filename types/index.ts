@@ -23,7 +23,10 @@ export type AddOnId =
   | "wellness-tea"
   | "self-care-kit"
   | "organic-upgrade"
-  | "extra-impact";
+  | "extra-impact"
+  | "sponsor-girl"
+  | "school-kit"
+  | "double-impact";
 
 export interface AddOn {
   id: AddOnId;

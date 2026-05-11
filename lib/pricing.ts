@@ -102,6 +102,35 @@ export const ADD_ONS: AddOn[] = [
   },
 ];
 
+export const IMPACT_ADD_ONS: AddOn[] = [
+  {
+    id: "sponsor-girl",
+    name: "Sponsor 1 Extra Girl",
+    description:
+      "Fund a complete 12-month menstrual care supply for one additional girl in an underserved community.",
+    price: 10000,
+    image: "",
+    badge: "Most Impactful",
+  },
+  {
+    id: "school-kit",
+    name: "School Kit Donation",
+    description:
+      "Provide a full menstrual health education kit — reusable pads, hygiene booklet, and carry pouch — donated directly to a partner school.",
+    price: 20000,
+    image: "",
+  },
+  {
+    id: "double-impact",
+    name: "Double Impact Upgrade",
+    description:
+      "Double the number of girls your subscription funds this year. Maximum reach, maximum dignity.",
+    price: 20000,
+    image: "",
+    badge: "Best Value",
+  },
+];
+
 export function getPlanPrice(plan: SubscriptionPlan, frequency: PlanFrequency): number {
   return frequency === "annual" ? plan.annualPrice : plan.monthlyPrice * 12;
 }
