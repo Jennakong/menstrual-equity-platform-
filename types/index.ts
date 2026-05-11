@@ -39,7 +39,7 @@ export interface AddOn {
 
 // ─── Delivery ─────────────────────────────────────────────────────────────────
 
-export type DeliveryZoneId = "nairobi" | "mombasa" | "kisumu" | "nakuru" | "other-kenya" | "international";
+export type DeliveryZoneId = "lagos" | "abuja" | "port-harcourt" | "ibadan" | "kano" | "other-nigeria" | "international";
 
 export interface DeliveryZone {
   id: DeliveryZoneId;
