@@ -276,9 +276,9 @@ export default function ChoosePathPage() {
           <div className="flex items-center justify-center gap-3 mt-8">
             <div className="h-px w-16 bg-gradient-to-r from-transparent to-sage-200" />
             <div className="flex gap-1.5">
-              {["coral-400", "sage-400", "blush-400"].map((c) => (
-                <div key={c} className={`w-1.5 h-1.5 rounded-full bg-${c}`} />
-              ))}
+              <div className="w-1.5 h-1.5 rounded-full bg-coral-400" />
+              <div className="w-1.5 h-1.5 rounded-full bg-sage-400" />
+              <div className="w-1.5 h-1.5 rounded-full bg-blush-400" />
             </div>
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-sage-200" />
           </div>
