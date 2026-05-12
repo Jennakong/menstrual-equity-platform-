@@ -16,7 +16,7 @@ export default function Hero() {
             <div className="text-center lg:text-left">
               <div className="inline-flex items-center gap-2 bg-coral-50 text-coral-600 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 border border-coral-100">
                 <span className="w-1.5 h-1.5 bg-coral-500 rounded-full animate-pulse" />
-                Buy-One, Give-One • Together We Can End Period Poverty in Africa
+                Buy One, Give One. A Step Toward Ending Period Poverty in Africa
               </div>
 
               <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-sage-900 leading-tight">
