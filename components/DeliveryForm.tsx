@@ -18,7 +18,7 @@ export default function DeliveryForm() {
     addressLine1: "",
     addressLine2: "",
     city: "",
-    zone: "lagos",
+    zone: "lagos" as const,
     useHub: false,
     hubId: "",
   });

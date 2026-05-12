@@ -37,7 +37,7 @@ export interface AddOn {
 
 // ─── Delivery ─────────────────────────────────────────────────────────────────
 
-export type DeliveryZoneId = "lagos" | "abuja" | "port-harcourt" | "ibadan" | "kano" | "other-nigeria" | "international";
+export type DeliveryZoneId = "lagos" | "abuja" | "south-south" | "international";
 
 export interface DeliveryZone {
   id: DeliveryZoneId;
@@ -54,6 +54,8 @@ export interface DeliveryAddress {
   addressLine1: string;
   addressLine2?: string;
   city: string;
+  state?: string;
+  country?: string;
   zone: DeliveryZoneId;
   useHub: boolean;
   hubId?: string;

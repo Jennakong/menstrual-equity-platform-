@@ -30,10 +30,10 @@ export const DELIVERY_HUBS: DeliveryHub[] = [
     openHours: "Mon–Sat 9am–7pm",
   },
   {
-    id: "hub-ph-gra",
-    name: "GRA Hub",
-    address: "Genesis Centre, Peter Odili Rd, Port Harcourt",
-    zone: "port-harcourt",
+    id: "hub-cal-gra",
+    name: "Calabar GRA Hub",
+    address: "Grand Square Mall, IBB Way, GRA, Calabar",
+    zone: "south-south",
     openHours: "Mon–Sat 8am–7pm",
   },
 ];
