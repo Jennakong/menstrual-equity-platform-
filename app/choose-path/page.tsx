@@ -208,7 +208,7 @@ const TRUST_ITEMS = [
 
 export default function ChoosePathPage() {
   const router = useRouter();
-  const { setPlan, setFrequency } = useCartStore();
+  const { setPlan } = useCartStore();
   const [selected, setSelected] = useState<PathId | null>(null);
   const [loading, setLoading] = useState<PathId | null>(null);
 
@@ -219,7 +219,6 @@ export default function ChoosePathPage() {
       const plan = SUBSCRIPTION_PLANS.find((p) => p.id === option.planId);
       if (plan) {
         setPlan(plan);
-        setFrequency("annual");
       }
     }
   }

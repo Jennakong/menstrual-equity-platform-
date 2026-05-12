@@ -177,7 +177,7 @@ function HeroSection() {
                 </div>
                 <div>
                   <p className="font-bold text-sage-900 text-sm leading-tight">12,400+ Girls Funded</p>
-                  <p className="text-xs text-gray-400 mt-0.5">Across East Africa this year</p>
+                  <p className="text-xs text-gray-400 mt-0.5">Across West Africa this year</p>
                 </div>
               </div>
 
@@ -476,7 +476,7 @@ function ImpactSection() {
     {
       value: "12,400+",
       label: "Girls Supported",
-      desc: "Girls across East Africa who received a full year's menstrual care supply",
+      desc: "Girls across Africa who received a full year's menstrual care supply",
       gradient: "from-coral-500 to-blush-500",
     },
     {

@@ -1,12 +1,11 @@
-import type { SubscriptionPlan, AddOn, OrderSummary, PlanFrequency } from "@/types";
+import type { SubscriptionPlan, AddOn, OrderSummary } from "@/types";
 
 export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
   {
     id: "essentials",
     name: "Essentials",
     tagline: "Everything you need, nothing more",
-    monthlyPrice: 3750,
-    annualPrice: 45000,
+    price: 45000,
     color: "sage",
     impactStatement: "Funds 1 girl's supply for the year",
     features: [
@@ -21,8 +20,7 @@ export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
     id: "comfort",
     name: "Comfort",
     tagline: "Premium care for you and her",
-    monthlyPrice: 5000,
-    annualPrice: 60000,
+    price: 60000,
     color: "coral",
     isPopular: true,
     impactStatement: "Funds 2 girls' supplies for the year",
@@ -39,8 +37,7 @@ export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
     id: "premium",
     name: "Premium",
     tagline: "The full luxury wellness experience",
-    monthlyPrice: 8334,
-    annualPrice: 100000,
+    price: 100000,
     color: "blush",
     impactStatement: "Funds 3 girls' supplies for the year",
     features: [
@@ -131,22 +128,13 @@ export const IMPACT_ADD_ONS: AddOn[] = [
   },
 ];
 
-export function getPlanPrice(plan: SubscriptionPlan, frequency: PlanFrequency): number {
-  return frequency === "annual" ? plan.annualPrice : plan.monthlyPrice * 12;
-}
-
-export function getAnnualSavings(plan: SubscriptionPlan): number {
-  return plan.monthlyPrice * 12 - plan.annualPrice;
-}
-
 export function calculateOrderSummary(
   plan: SubscriptionPlan | null,
-  frequency: PlanFrequency,
   addOns: AddOn[],
   deliveryFee: number,
   promoDiscount: number
 ): OrderSummary {
-  const subtotal = plan ? getPlanPrice(plan, frequency) : 0;
+  const subtotal = plan ? plan.price : 0;
   const addOnsTotal = addOns.reduce((sum, a) => sum + a.price, 0);
   const discountAmount = Math.round((subtotal + addOnsTotal) * promoDiscount);
   const total = Math.max(0, subtotal + addOnsTotal + deliveryFee - discountAmount);

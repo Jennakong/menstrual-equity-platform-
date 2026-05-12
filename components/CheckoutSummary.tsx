@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { useCartStore } from "@/store/useCartStore";
-import { calculateOrderSummary, getPlanPrice } from "@/lib/pricing";
+import { calculateOrderSummary } from "@/lib/pricing";
 import { getDeliveryZoneById } from "@/lib/deliveryZones";
 import { buildImpactSummary } from "@/lib/impactLogic";
 
 export default function CheckoutSummary() {
-  const { plan, frequency, addOns, delivery, promoCode, promoDiscount, applyPromoCode, clearPromoCode } =
+  const { plan, addOns, delivery, promoCode, promoDiscount, applyPromoCode, clearPromoCode } =
     useCartStore();
 
   const [promoInput, setPromoInput] = useState("");
@@ -16,7 +16,7 @@ export default function CheckoutSummary() {
   const zone = delivery?.zone ? getDeliveryZoneById(delivery.zone) : undefined;
   const deliveryFee = delivery?.useHub ? 0 : (zone?.price ?? 0);
 
-  const summary = calculateOrderSummary(plan, frequency, addOns, deliveryFee, promoDiscount);
+  const summary = calculateOrderSummary(plan, addOns, deliveryFee, promoDiscount);
   const impact = plan ? buildImpactSummary(summary) : null;
 
   function handleApplyPromo() {
@@ -37,10 +37,10 @@ export default function CheckoutSummary() {
           <div className="flex justify-between items-start">
             <div>
               <p className="font-semibold text-sage-900 text-sm">{plan.name} Plan</p>
-              <p className="text-xs text-gray-400 capitalize">{frequency} subscription</p>
+              <p className="text-xs text-gray-400">Annual · 12-month plan</p>
             </div>
             <span className="font-semibold text-sage-900 text-sm">
-              ₦{getPlanPrice(plan, frequency).toLocaleString()}
+              ₦{plan.price.toLocaleString()}
             </span>
           </div>
         ) : (
@@ -120,7 +120,7 @@ export default function CheckoutSummary() {
             <span className="font-display text-2xl font-bold text-sage-900">₦{summary.total.toLocaleString()}</span>
           </div>
           <p className="text-xs text-gray-400 mt-1">
-            {frequency === "annual" ? "Billed annually · " : ""}Cancel anytime
+            Billed annually · Cancel anytime
           </p>
         </div>
 

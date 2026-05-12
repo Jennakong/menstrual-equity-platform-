@@ -1,13 +1,11 @@
 "use client";
 
 import { useCartStore } from "@/store/useCartStore";
-import type { SubscriptionPlan, PlanFrequency } from "@/types";
-import { getPlanPrice, getAnnualSavings } from "@/lib/pricing";
+import type { SubscriptionPlan } from "@/types";
 import CTAButton from "./CTAButton";
 
 interface Props {
   plan: SubscriptionPlan;
-  frequency: PlanFrequency;
   onSelect?: () => void;
 }
 
@@ -38,16 +36,13 @@ const colorMap = {
   },
 } as const;
 
-export default function SubscriptionCard({ plan, frequency, onSelect }: Props) {
-  const { setPlan, plan: activePlan, setFrequency } = useCartStore();
+export default function SubscriptionCard({ plan, onSelect }: Props) {
+  const { setPlan, plan: activePlan } = useCartStore();
   const isSelected = activePlan?.id === plan.id;
   const c = colorMap[plan.color as keyof typeof colorMap] ?? colorMap.sage;
-  const price = getPlanPrice(plan, frequency);
-  const savings = getAnnualSavings(plan);
 
   function handleSelect() {
     setPlan(plan);
-    setFrequency(frequency);
     onSelect?.();
   }
 
@@ -58,7 +53,6 @@ export default function SubscriptionCard({ plan, frequency, onSelect }: Props) {
       } ${plan.isPopular ? "scale-[1.02]" : ""}`}
       onClick={handleSelect}
     >
-      {/* Popular badge */}
       {plan.isPopular && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2">
           <span className="bg-coral-500 text-white text-xs font-bold px-4 py-1 rounded-full shadow-soft whitespace-nowrap">
@@ -67,33 +61,25 @@ export default function SubscriptionCard({ plan, frequency, onSelect }: Props) {
         </div>
       )}
 
-      {/* Plan name & tagline */}
       <div className="mb-4">
         <h3 className="font-display text-xl font-bold text-sage-900">{plan.name}</h3>
         <p className="text-xs text-gray-400 mt-0.5">{plan.tagline}</p>
       </div>
 
-      {/* Price */}
       <div className="mb-6">
         <div className="flex items-end gap-1">
           <span className="font-display text-4xl font-bold text-sage-900">
-            ${frequency === "annual" ? plan.annualPrice : plan.monthlyPrice * 12}
+            ₦{plan.price.toLocaleString()}
           </span>
           <span className="text-gray-400 text-sm mb-1">/ year</span>
         </div>
-        {frequency === "annual" && savings > 0 && (
-          <span className={`inline-block mt-1 text-xs font-semibold px-2 py-0.5 rounded-full border ${c.badge}`}>
-            Save ${savings} vs monthly
-          </span>
-        )}
+        <p className="text-xs text-gray-400 mt-1">Annual · 12-month plan</p>
       </div>
 
-      {/* Impact */}
       <div className={`rounded-xl px-3 py-2 mb-5 ${c.icon}`}>
         <p className="text-xs font-semibold">🌍 {plan.impactStatement}</p>
       </div>
 
-      {/* Features */}
       <ul className="space-y-2 mb-6 flex-1">
         {plan.features.map((feature) => (
           <li key={feature} className="flex items-start gap-2 text-sm text-gray-600">
@@ -111,7 +97,6 @@ export default function SubscriptionCard({ plan, frequency, onSelect }: Props) {
         ))}
       </ul>
 
-      {/* CTA */}
       <CTAButton
         fullWidth
         variant={isSelected ? "primary" : "secondary"}

@@ -1,14 +1,12 @@
 // ─── Subscription Plans ───────────────────────────────────────────────────────
 
 export type PlanTier = "essentials" | "comfort" | "premium";
-export type PlanFrequency = "monthly" | "annual";
 
 export interface SubscriptionPlan {
   id: PlanTier;
   name: string;
   tagline: string;
-  monthlyPrice: number;
-  annualPrice: number;
+  price: number;
   features: string[];
   isPopular?: boolean;
   color: string;
@@ -75,7 +73,6 @@ export interface DeliveryHub {
 
 export interface CartState {
   plan: SubscriptionPlan | null;
-  frequency: PlanFrequency;
   addOns: AddOn[];
   delivery: DeliveryAddress | null;
   promoCode: string;

@@ -8,11 +8,11 @@ import { getDeliveryZoneById } from "@/lib/deliveryZones";
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { plan, frequency, addOns, delivery, promoDiscount, resetCart } = useCartStore();
+  const { plan, addOns, delivery, promoDiscount, resetCart } = useCartStore();
 
   const zone = delivery?.zone ? getDeliveryZoneById(delivery.zone) : undefined;
   const deliveryFee = delivery?.useHub ? 0 : (zone?.price ?? 0);
-  const summary = calculateOrderSummary(plan, frequency, addOns, deliveryFee, promoDiscount);
+  const summary = calculateOrderSummary(plan, addOns, deliveryFee, promoDiscount);
 
   function handlePlaceOrder() {
     resetCart();
@@ -129,14 +129,14 @@ export default function CheckoutPage() {
                   </div>
                 </div>
 
-                {/* M-Pesa placeholder */}
-                <div className="bg-green-50 border border-green-100 rounded-2xl p-4 flex items-center gap-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
-                    <span className="text-green-700 font-bold text-xs">M</span>
+                {/* Paystack / mobile money placeholder */}
+                <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                    <span className="text-blue-700 font-bold text-xs">₦</span>
                   </div>
                   <div>
-                    <p className="font-semibold text-green-800 text-sm">M-Pesa Coming Soon</p>
-                    <p className="text-xs text-green-600">We'll be supporting mobile money in our next release.</p>
+                    <p className="font-semibold text-blue-800 text-sm">Paystack & Bank Transfer Coming Soon</p>
+                    <p className="text-xs text-blue-600">We'll be supporting Paystack, Flutterwave, and USSD in our next release.</p>
                   </div>
                 </div>
               </div>
@@ -146,7 +146,7 @@ export default function CheckoutPage() {
                 onClick={handlePlaceOrder}
                 className="w-full mt-8 bg-coral-500 hover:bg-coral-600 text-white font-bold py-4 rounded-2xl transition-all shadow-soft hover:shadow-card text-lg"
               >
-                Place Order — ${summary.total}
+                Place Order — ₦{summary.total.toLocaleString()}
               </button>
 
               <p className="text-center text-xs text-gray-400 mt-3">
