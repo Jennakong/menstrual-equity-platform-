@@ -1,10 +1,13 @@
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === "production";
+const isGitHubPages = process.env.GITHUB_PAGES === "true";
 
 const nextConfig = {
-  output: "export",
-  basePath: isProd ? "/menstrual-equity-platform-" : "",
-  assetPrefix: isProd ? "/menstrual-equity-platform-/" : "",
+  // Static export only for GitHub Pages — Vercel handles Next.js natively
+  ...(isGitHubPages && {
+    output: "export",
+    basePath: "/menstrual-equity-platform-",
+    assetPrefix: "/menstrual-equity-platform-/",
+  }),
   images: {
     unoptimized: true,
   },
