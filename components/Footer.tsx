@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
+import { SITE_TAGLINE } from "@/lib/constants";
 
 export default function Footer() {
   return (
@@ -8,13 +8,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-sage-400 to-coral-400 flex items-center justify-center">
-                <span className="text-white text-sm font-bold">B</span>
-              </div>
-              <span className="font-display font-bold text-lg text-white">{SITE_NAME}</span>
+            <div className="flex items-baseline mb-1">
+              <span className="font-display font-bold text-2xl text-white tracking-tight">Luw</span>
+              <span className="font-display font-bold text-2xl text-coral-400 italic tracking-tight">á</span>
             </div>
-            <p className="text-sage-300 text-sm leading-relaxed">{SITE_TAGLINE}</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-sage-500 mb-4">
+              {SITE_TAGLINE}
+            </p>
             <div className="flex gap-3 mt-6">
               {["Instagram", "Twitter", "LinkedIn"].map((social) => (
                 <a
@@ -94,7 +94,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-sage-700 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-sage-400">
-          <p>© {new Date().getFullYear()} {SITE_NAME}. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Luwá. All rights reserved.</p>
           <div className="flex gap-4">
             <Link href="#" className="hover:text-sage-200 transition-colors">Privacy Policy</Link>
             <Link href="#" className="hover:text-sage-200 transition-colors">Terms of Service</Link>
