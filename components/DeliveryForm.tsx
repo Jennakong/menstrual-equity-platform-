@@ -18,7 +18,7 @@ export default function DeliveryForm() {
     addressLine1: "",
     addressLine2: "",
     city: "",
-    zone: "nairobi",
+    zone: "lagos" as const,
     useHub: false,
     hubId: "",
   });
@@ -67,7 +67,7 @@ export default function DeliveryForm() {
           <input
             type="text"
             className={inputCls("fullName")}
-            placeholder="Amara Osei"
+            placeholder="Amara Okafor"
             value={form.fullName}
             onChange={(e) => set("fullName", e.target.value)}
           />
@@ -78,7 +78,7 @@ export default function DeliveryForm() {
           <input
             type="tel"
             className={inputCls("phone")}
-            placeholder="+254 700 000 000"
+            placeholder="+234 801 000 0000"
             value={form.phone}
             onChange={(e) => set("phone", e.target.value)}
           />
@@ -111,7 +111,7 @@ export default function DeliveryForm() {
         >
           {DELIVERY_ZONES.map((zone) => (
             <option key={zone.id} value={zone.id}>
-              {zone.label} — {zone.price === 0 ? "Free" : `$${zone.price}`} · {zone.estimatedDays}
+              {zone.label} — {zone.price === 0 ? "Free" : `₦${zone.price.toLocaleString()}`} · {zone.estimatedDays}
             </option>
           ))}
         </select>
@@ -177,7 +177,7 @@ export default function DeliveryForm() {
             <input
               type="text"
               className={inputCls("addressLine1")}
-              placeholder="123 Kenyatta Avenue"
+              placeholder="12 Broad Street"
               value={form.addressLine1}
               onChange={(e) => set("addressLine1", e.target.value)}
             />
@@ -201,7 +201,7 @@ export default function DeliveryForm() {
         <input
           type="text"
           className={inputCls("city")}
-          placeholder="Nairobi"
+          placeholder="Lagos"
           value={form.city}
           onChange={(e) => set("city", e.target.value)}
         />

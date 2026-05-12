@@ -2,19 +2,17 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { SubscriptionPlan, AddOn, DeliveryAddress, PlanFrequency } from "@/types";
+import type { SubscriptionPlan, AddOn, DeliveryAddress } from "@/types";
 import { PROMO_CODES } from "@/lib/constants";
 
 interface CartStore {
   plan: SubscriptionPlan | null;
-  frequency: PlanFrequency;
   addOns: AddOn[];
   delivery: DeliveryAddress | null;
   promoCode: string;
   promoDiscount: number;
 
   setPlan: (plan: SubscriptionPlan) => void;
-  setFrequency: (frequency: PlanFrequency) => void;
   toggleAddOn: (addOn: AddOn) => void;
   setDelivery: (delivery: DeliveryAddress) => void;
   applyPromoCode: (code: string) => { success: boolean; message: string };
@@ -24,7 +22,6 @@ interface CartStore {
 
 const initialState = {
   plan: null,
-  frequency: "annual" as PlanFrequency,
   addOns: [] as AddOn[],
   delivery: null,
   promoCode: "",
@@ -37,8 +34,6 @@ export const useCartStore = create<CartStore>()(
       ...initialState,
 
       setPlan: (plan) => set({ plan }),
-
-      setFrequency: (frequency) => set({ frequency }),
 
       toggleAddOn: (addOn) => {
         const { addOns } = get();
@@ -65,10 +60,9 @@ export const useCartStore = create<CartStore>()(
       resetCart: () => set(initialState),
     }),
     {
-      name: "bloom-give-cart",
+      name: "luwa-cart",
       partialize: (state) => ({
         plan: state.plan,
-        frequency: state.frequency,
         addOns: state.addOns,
         promoCode: state.promoCode,
         promoDiscount: state.promoDiscount,

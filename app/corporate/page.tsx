@@ -263,8 +263,8 @@ export default function CorporatePage() {
 
               <p className="text-center text-xs text-gray-400">
                 Or email us directly at{" "}
-                <a href="mailto:corporate@bloomandgive.com" className="text-sage-500 hover:underline">
-                  corporate@bloomandgive.com
+                <a href="mailto:corporate@luwa.com" className="text-sage-500 hover:underline">
+                  corporate@luwa.com
                 </a>
               </p>
             </div>

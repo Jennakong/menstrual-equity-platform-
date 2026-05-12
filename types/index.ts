@@ -1,14 +1,12 @@
 // ─── Subscription Plans ───────────────────────────────────────────────────────
 
 export type PlanTier = "essentials" | "comfort" | "premium";
-export type PlanFrequency = "monthly" | "annual";
 
 export interface SubscriptionPlan {
   id: PlanTier;
   name: string;
   tagline: string;
-  monthlyPrice: number;
-  annualPrice: number;
+  price: number;
   features: string[];
   isPopular?: boolean;
   color: string;
@@ -23,7 +21,10 @@ export type AddOnId =
   | "wellness-tea"
   | "self-care-kit"
   | "organic-upgrade"
-  | "extra-impact";
+  | "extra-impact"
+  | "sponsor-girl"
+  | "school-kit"
+  | "double-impact";
 
 export interface AddOn {
   id: AddOnId;
@@ -36,7 +37,7 @@ export interface AddOn {
 
 // ─── Delivery ─────────────────────────────────────────────────────────────────
 
-export type DeliveryZoneId = "nairobi" | "mombasa" | "kisumu" | "nakuru" | "other-kenya" | "international";
+export type DeliveryZoneId = "lagos" | "abuja" | "south-south" | "international";
 
 export interface DeliveryZone {
   id: DeliveryZoneId;
@@ -53,6 +54,8 @@ export interface DeliveryAddress {
   addressLine1: string;
   addressLine2?: string;
   city: string;
+  state?: string;
+  country?: string;
   zone: DeliveryZoneId;
   useHub: boolean;
   hubId?: string;
@@ -72,7 +75,6 @@ export interface DeliveryHub {
 
 export interface CartState {
   plan: SubscriptionPlan | null;
-  frequency: PlanFrequency;
   addOns: AddOn[];
   delivery: DeliveryAddress | null;
   promoCode: string;

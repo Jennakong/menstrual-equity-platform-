@@ -1,12 +1,11 @@
-import type { SubscriptionPlan, AddOn, OrderSummary, PlanFrequency } from "@/types";
+import type { SubscriptionPlan, AddOn, OrderSummary } from "@/types";
 
 export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
   {
     id: "essentials",
     name: "Essentials",
     tagline: "Everything you need, nothing more",
-    monthlyPrice: 18,
-    annualPrice: 180,
+    price: 45000,
     color: "sage",
     impactStatement: "Funds 1 girl's supply for the year",
     features: [
@@ -21,8 +20,7 @@ export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
     id: "comfort",
     name: "Comfort",
     tagline: "Premium care for you and her",
-    monthlyPrice: 28,
-    annualPrice: 280,
+    price: 60000,
     color: "coral",
     isPopular: true,
     impactStatement: "Funds 2 girls' supplies for the year",
@@ -39,8 +37,7 @@ export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
     id: "premium",
     name: "Premium",
     tagline: "The full luxury wellness experience",
-    monthlyPrice: 45,
-    annualPrice: 450,
+    price: 100000,
     color: "blush",
     impactStatement: "Funds 3 girls' supplies for the year",
     features: [
@@ -59,7 +56,7 @@ export const ADD_ONS: AddOn[] = [
     id: "cramp-relief",
     name: "Cramp Relief Kit",
     description: "Natural roll-on oil + herbal heat patch combo",
-    price: 12,
+    price: 12000,
     image: "/images/addon-cramp-relief.jpg",
     badge: "Best Seller",
   },
@@ -67,14 +64,14 @@ export const ADD_ONS: AddOn[] = [
     id: "heating-pad",
     name: "Reusable Heating Pad",
     description: "USB-powered, cordless, ultra-soft cover",
-    price: 24,
+    price: 24000,
     image: "/images/addon-heating-pad.jpg",
   },
   {
     id: "wellness-tea",
     name: "Wellness Tea Bundle",
     description: "4 blends: Raspberry Leaf, Ginger, Chamomile & Peppermint",
-    price: 16,
+    price: 16000,
     image: "/images/addon-tea.jpg",
     badge: "New",
   },
@@ -82,42 +79,62 @@ export const ADD_ONS: AddOn[] = [
     id: "self-care-kit",
     name: "Self-Care Kit",
     description: "Face mask, body scrub & aromatherapy candle",
-    price: 30,
+    price: 30000,
     image: "/images/addon-selfcare.jpg",
   },
   {
     id: "organic-upgrade",
     name: "Organic Upgrade",
     description: "Switch to 100% certified organic cotton across your plan",
-    price: 8,
+    price: 8000,
     image: "/images/addon-organic.jpg",
   },
   {
     id: "extra-impact",
     name: "Double Your Impact",
     description: "Fund an extra girl's annual supply — pure giving, no products",
-    price: 10,
+    price: 10000,
     image: "/images/addon-impact.jpg",
     badge: "Give More",
   },
 ];
 
-export function getPlanPrice(plan: SubscriptionPlan, frequency: PlanFrequency): number {
-  return frequency === "annual" ? plan.annualPrice : plan.monthlyPrice * 12;
-}
-
-export function getAnnualSavings(plan: SubscriptionPlan): number {
-  return plan.monthlyPrice * 12 - plan.annualPrice;
-}
+export const IMPACT_ADD_ONS: AddOn[] = [
+  {
+    id: "sponsor-girl",
+    name: "Sponsor 1 Extra Girl",
+    description:
+      "Fund a complete 12-month menstrual care supply for one additional girl in an underserved community.",
+    price: 10000,
+    image: "",
+    badge: "Most Impactful",
+  },
+  {
+    id: "school-kit",
+    name: "School Kit Donation",
+    description:
+      "Provide a full menstrual health education kit — reusable pads, hygiene booklet, and carry pouch — donated directly to a partner school.",
+    price: 20000,
+    image: "",
+  },
+  {
+    id: "double-impact",
+    name: "Double Impact Upgrade",
+    description:
+      "Double the number of girls your subscription funds this year. Maximum reach, maximum dignity.",
+    price: 20000,
+    image: "",
+    badge: "Best Value",
+  },
+];
 
 export function calculateOrderSummary(
   plan: SubscriptionPlan | null,
-  frequency: PlanFrequency,
   addOns: AddOn[],
   deliveryFee: number,
   promoDiscount: number
 ): OrderSummary {
-  const subtotal = plan ? getPlanPrice(plan, frequency) : 0;
+  const subtotal = plan ? plan.price : 0;
   const addOnsTotal = addOns.reduce((sum, a) => sum + a.price, 0);
   const discountAmount = Math.round((subtotal + addOnsTotal) * promoDiscount);
   const total = Math.max(0, subtotal + addOnsTotal + deliveryFee - discountAmount);

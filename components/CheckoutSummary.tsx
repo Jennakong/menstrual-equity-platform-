@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { useCartStore } from "@/store/useCartStore";
-import { calculateOrderSummary, getPlanPrice } from "@/lib/pricing";
+import { calculateOrderSummary } from "@/lib/pricing";
 import { getDeliveryZoneById } from "@/lib/deliveryZones";
 import { buildImpactSummary } from "@/lib/impactLogic";
 
 export default function CheckoutSummary() {
-  const { plan, frequency, addOns, delivery, promoCode, promoDiscount, applyPromoCode, clearPromoCode } =
+  const { plan, addOns, delivery, promoCode, promoDiscount, applyPromoCode, clearPromoCode } =
     useCartStore();
 
   const [promoInput, setPromoInput] = useState("");
@@ -16,7 +16,7 @@ export default function CheckoutSummary() {
   const zone = delivery?.zone ? getDeliveryZoneById(delivery.zone) : undefined;
   const deliveryFee = delivery?.useHub ? 0 : (zone?.price ?? 0);
 
-  const summary = calculateOrderSummary(plan, frequency, addOns, deliveryFee, promoDiscount);
+  const summary = calculateOrderSummary(plan, addOns, deliveryFee, promoDiscount);
   const impact = plan ? buildImpactSummary(summary) : null;
 
   function handleApplyPromo() {
@@ -37,10 +37,10 @@ export default function CheckoutSummary() {
           <div className="flex justify-between items-start">
             <div>
               <p className="font-semibold text-sage-900 text-sm">{plan.name} Plan</p>
-              <p className="text-xs text-gray-400 capitalize">{frequency} subscription</p>
+              <p className="text-xs text-gray-400">Annual · 12-month plan</p>
             </div>
             <span className="font-semibold text-sage-900 text-sm">
-              ${getPlanPrice(plan, frequency)}
+              ₦{plan.price.toLocaleString()}
             </span>
           </div>
         ) : (
@@ -54,7 +54,7 @@ export default function CheckoutSummary() {
             {addOns.map((a) => (
               <div key={a.id} className="flex justify-between text-sm">
                 <span className="text-gray-600">{a.name}</span>
-                <span className="text-sage-800">+${a.price}</span>
+                <span className="text-sage-800">+₦{a.price.toLocaleString()}</span>
               </div>
             ))}
           </div>
@@ -66,7 +66,7 @@ export default function CheckoutSummary() {
             {delivery?.useHub ? "Hub Pickup" : `Delivery (${zone?.label ?? "—"})`}
           </span>
           <span className={deliveryFee === 0 ? "text-sage-500 font-semibold" : "text-sage-800"}>
-            {deliveryFee === 0 ? "FREE" : `$${deliveryFee}`}
+            {deliveryFee === 0 ? "FREE" : `₦${deliveryFee.toLocaleString()}`}
           </span>
         </div>
 
@@ -77,7 +77,7 @@ export default function CheckoutSummary() {
               Promo <span className="font-mono text-xs bg-sage-100 px-1.5 py-0.5 rounded">{promoCode}</span>
             </span>
             <div className="flex items-center gap-2">
-              <span className="text-sage-500 font-semibold">−${summary.promoDiscount}</span>
+              <span className="text-sage-500 font-semibold">−₦{summary.promoDiscount.toLocaleString()}</span>
               <button
                 onClick={clearPromoCode}
                 className="text-xs text-red-400 hover:text-red-600 transition-colors"
@@ -117,10 +117,10 @@ export default function CheckoutSummary() {
         <div className="border-t border-sage-100 pt-4">
           <div className="flex justify-between items-center">
             <span className="font-bold text-sage-900">Total</span>
-            <span className="font-display text-2xl font-bold text-sage-900">${summary.total}</span>
+            <span className="font-display text-2xl font-bold text-sage-900">₦{summary.total.toLocaleString()}</span>
           </div>
           <p className="text-xs text-gray-400 mt-1">
-            {frequency === "annual" ? "Billed annually · " : ""}Cancel anytime
+            Billed annually · Cancel anytime
           </p>
         </div>
 
