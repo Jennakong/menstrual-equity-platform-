@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useCartStore } from "@/store/useCartStore";
 import CTAButton from "./CTAButton";
-import { SITE_TAGLINE } from "@/lib/constants";
+import { SITE_NAME } from "@/lib/constants";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -17,17 +17,12 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="group flex flex-col leading-none" aria-label="Luwá — Brighter Days · Always">
-            <div className="flex items-baseline">
-              <span className="font-display font-bold text-2xl text-sage-900 group-hover:text-sage-700 transition-colors tracking-tight">
-                Luw
-              </span>
-              <span className="font-display font-bold text-2xl text-coral-500 italic group-hover:text-coral-600 transition-colors tracking-tight">
-                á
-              </span>
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-sage-400 to-coral-400 flex items-center justify-center">
+              <span className="text-white text-sm font-bold">B</span>
             </div>
-            <span className="text-[8px] font-semibold uppercase tracking-[0.2em] text-sage-400 group-hover:text-sage-500 transition-colors hidden sm:block">
-              {SITE_TAGLINE}
+            <span className="font-display font-bold text-lg text-sage-800 group-hover:text-sage-600 transition-colors">
+              {SITE_NAME}
             </span>
           </Link>
 

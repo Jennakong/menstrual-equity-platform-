@@ -60,7 +60,7 @@ export const useCartStore = create<CartStore>()(
       resetCart: () => set(initialState),
     }),
     {
-      name: "luwa-cart",
+      name: "bloom-give-cart",
       partialize: (state) => ({
         plan: state.plan,
         addOns: state.addOns,
