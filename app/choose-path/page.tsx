@@ -93,7 +93,7 @@ const PATH_OPTIONS = [
     id: "explorer" as PathId,
     badge: null,
     title: "Impact Explorer",
-    price: "₦60,000 – ₦100,000",
+    price: "₦100,000",
     priceNote: "/ year · flexible tier",
     tagline: "For those who want to give more",
     highlighted: false,
@@ -490,8 +490,7 @@ export default function ChoosePathPage() {
             </h3>
             <p className="text-sage-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
               Across sub-Saharan Africa, 1 in 10 girls misses school during her period due to lack of
-              access to menstrual products. Your subscription breaks that cycle — permanently and
-              measurably.
+              access to menstrual products. Your subscription breaks that cycle measurably.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-4">
               {[
